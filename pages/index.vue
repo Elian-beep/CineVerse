@@ -1,10 +1,28 @@
 <script lang="ts" setup>
-const ps = 60;
+import { getPopularStream } from '~/composables/conn';
+import { useMoviesStore } from '~/store/movie.store';
+
+const moviesStore = useMoviesStore();
+
+const fetchPopularMovies = async () => {
+    try{
+        if(moviesStore.getPopularMovies.length === 0)
+        moviesStore.setPopularMovies(await getPopularStream('movie', 1));
+    }catch(error){
+        console.error('Erro na requisição:', error);
+    }
+}
+
+onMounted( async () => {
+    fetchPopularMovies();
+});
+
 </script>
 
 <template>
-    <div v-for="p in ps">
-        <p class="text-subtitle">Olá mundo</p>
+    <div v-for="movie in moviesStore.getPopularMovies">
+        <p class="text-content">
+            {{ movie.title }}
+        </p>
     </div>
-    <p class="text-subtitle">Olá mundo</p>
 </template>

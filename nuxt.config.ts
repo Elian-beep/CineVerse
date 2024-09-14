@@ -4,6 +4,11 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss'],
   css: ['~/assets/css/tailwind.css'],
+  runtimeConfig: {
+    public: {
+      apiKeyTmdb: process.env.NUXT_API_KEY_TMDB,
+    },
+  },
   devServer: {
     port: 8080,
   },

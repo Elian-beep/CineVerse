@@ -7,13 +7,13 @@ const handleScroll = () => {
     isScrolled.value = window.scrollY > 500;
 };
 
-onMounted(() => {
-    window.addEventListener('scroll', handleScroll);
-});
+// onMounted(() => {
+//     window.addEventListener('scroll', handleScroll);
+// });
 
-onBeforeUnmount(() => {
-    window.removeEventListener('scroll', handleScroll);
-});
+// onBeforeUnmount(() => {
+//     window.removeEventListener('scroll', handleScroll);
+// });
 </script>
 
 <template>
@@ -23,6 +23,7 @@ onBeforeUnmount(() => {
         <!-- <header class="bg-app text-content p-6 b-none"> -->
             <NavigationMenu />
         </header>
+
         <main class="flex-grow p-6 bg-background min-h-100">
             <NuxtLayout>
                 <NuxtPage />

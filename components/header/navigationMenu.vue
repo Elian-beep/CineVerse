@@ -61,7 +61,7 @@ const toggleMenu = () => {
 }
 
 .custom-desktop-navbar {
-    @apply sm:static sm:flex sm:justify-center sm:space-x-6 sm:translate-x-0 sm:p-0 sm:w-auto;
+    @apply sm:static sm:flex sm:justify-center sm:space-x-6 sm:translate-x-0 sm:p-0 sm:w-auto sm:bg-none;
 }
 
 .custom-desktop-items {
