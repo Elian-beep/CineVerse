@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia'
+import type { IMovie } from '~/interfaces/IMovie';
 
 export const useMoviesStore = defineStore('movies', {
     state: () => ({
-        popularMovies: [] as Array<any>,
+        popularMovies: [] as Array<IMovie>,
         indexPopularMovie: 0 as number,
     }),
 
@@ -12,7 +13,7 @@ export const useMoviesStore = defineStore('movies', {
     },
 
     actions: {
-        setPopularMovies(dataMovies: any) {
+        setPopularMovies(dataMovies: Array<IMovie>) {
             this.popularMovies = dataMovies;
         },
         setIndexPopularMovie(newIndex: number) {

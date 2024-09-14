@@ -2,12 +2,17 @@
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { getPopularStream } from '~/composables/conn';
 import { useMoviesStore } from '~/store/movie.store';
-import { faPlay, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { faPlay, faPlusCircle, faBookmark } from '@fortawesome/free-solid-svg-icons';
+import { type IMovie } from '~/interfaces/IMovie';
 
 const moviesStore = useMoviesStore();
 
-// const tempMovie = ref();
 const indexMovie = ref(moviesStore.getIndexPopularMovie);
+const btnConfigBookmarked = ref({
+    iSave: false,
+    titleSave: 'Adicionar à lista',
+    titleUnsave: 'Adicionado a lista',
+});
 
 
 const fetchPopularMovies = async () => {
@@ -15,51 +20,71 @@ const fetchPopularMovies = async () => {
         if (moviesStore.getPopularMovies.length === 0) {
             moviesStore.setPopularMovies(await getPopularStream('movie', 1));
         }
-        // tempMovie.value = moviesStore.getPopularMovies[0];
-        // console.log('DADOS DO FILME: ', tempMovie.value);
     } catch (error) {
         console.error('Erro na requisição:', error);
     }
 }
 
 const nextPopularMovies = () => {
-    const currentIndex = indexMovie.value;
-    indexMovie.value = (currentIndex + 1) % moviesStore.getPopularMovies.length;
+    indexMovie.value = (indexMovie.value + 1) % moviesStore.getPopularMovies.length;
+    btnConfigBookmarked.value.iSave = checkBookmarked(moviesStore.getPopularMovies[indexMovie.value]);
     moviesStore.setIndexPopularMovie(indexMovie.value);
 }
 
+const handleToggleBookmarked = (movie: IMovie) => {
+    toggleBookmarked(moviesStore.getPopularMovies[moviesStore.getIndexPopularMovie])
+    btnConfigBookmarked.value.iSave = checkBookmarked(moviesStore.getPopularMovies[indexMovie.value]);
+}
+
+if(moviesStore.getPopularMovies.length > 0){
+    
+}
+
+watch(
+  () => moviesStore.popularMovies,
+  (newMovies) => {
+    if (newMovies.length > 0) {
+      btnConfigBookmarked.value.iSave = checkBookmarked(moviesStore.getPopularMovies[indexMovie.value]);
+      setInterval(nextPopularMovies, 60000);
+    }
+  },
+  { immediate: true }
+);
 
 onMounted(async () => {
     fetchPopularMovies();
-    setInterval(nextPopularMovies, 20000);
 });
 </script>
 
 <template>
     <div class="custom-background flex flex-col w-100 flex flex-col justify-items-end">
 
-        <div class="custom-background-size relative bg-cover bg-no-repeat bg-center sm:h-xl sm:bg-top"
+        <div class="custom-background-size relative bg-cover bg-no-repeat bg-center sm:py-24 sm:px-5 sm:h-screen sm:gb-fixed sm:grid"
             :style="`background-image: url('https://image.tmdb.org/t/p/original${moviesStore.getPopularMovies[indexMovie]?.poster_path}');`">
 
             <div class="custom-background-desc w-full absolute bottom-0">
-                <div class="w-96 bg-green mx-auto flex flex-col gap-4 sm:m-0 sm:ml-20 sm:gap-6 sm:w-1/2">
+                <div class="w-96 bg-green mx-auto flex flex-col gap-4 sm:m-0 sm:ml-20 sm:gap-6 sm:w-1/2 md:w-1/3">
 
-                    <span class="text-content text-3xl font-bold sm:text-5xl">{{ moviesStore.getPopularMovies[indexMovie]?.title }}</span>
-                    <p class=" text-subtitle text-base sm:text-xl">{{ moviesStore.getPopularMovies[indexMovie]?.overview }}</p>
+                    <span class="text-content text-3xl font-bold sm:text-5xl">{{
+                        moviesStore.getPopularMovies[indexMovie]?.title }}</span>
+                    <p class=" text-subtitle text-base sm:text-xl">{{ moviesStore.getPopularMovies[indexMovie]?.overview
+                        }}</p>
 
                     <div class="flex gap-4 sm:mt-6 sm:gap-6">
+
                         <a :href="`https://www.youtube.com/results?search_query=${moviesStore.getPopularMovies[indexMovie]?.title} Trailer`"
                             target=”_blank”
                             class=" custom-hover-trailer transition-transform transition-300 transition-ease bg-primary rounded-full px-4 py-3 flex gap-2 items-center text-app font-bold">
                             <FontAwesomeIcon :icon="faPlay" />
                             Trailer
-                            <!-- <span class="text-app font-bold">Trailer</span> -->
                         </a>
-                        <button
+
+                        <button @click="handleToggleBookmarked(moviesStore.getPopularMovies[indexMovie])"
                             class="bg-transparent rounded-full px-4 py-3 text-primary flex gap-2 items-center border-solid border-2 border-primary sm:hover:bg-primary sm:hover:bg-opacity-15">
-                            <FontAwesomeIcon :icon="faPlusCircle" />
-                            <span>Adicionar à lista</span>
+                            <FontAwesomeIcon :icon="btnConfigBookmarked.iSave ? faBookmark : faPlusCircle" />
+                            <span>{{ btnConfigBookmarked.iSave ? btnConfigBookmarked.titleUnsave : btnConfigBookmarked.titleSave }}</span>
                         </button>
+
                     </div>
 
                 </div>
@@ -80,6 +105,7 @@ onMounted(async () => {
 
 .custom-background-size {
     height: 550px;
+    background-image: linear-gradient(to right, black, rgba(0, 0, 0, 0.5))
 }
 
 .custom-background-desc {
@@ -88,7 +114,7 @@ onMounted(async () => {
 
 @media screen and (min-width: 640px) {
     .custom-background-size {
-        height: 640px;
+        height: 75vh;
     }
 }
 </style>
