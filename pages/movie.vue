@@ -1,4 +1,7 @@
+<script setup lang="ts">
+import PopularMovie from '~/components/main/PopularMovie.vue';
+</script>
+
 <template>
-    <p class="text-content">Filmes</p>
-    Filmes aqui
+    <PopularMovie />
 </template>

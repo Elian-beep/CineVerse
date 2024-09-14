@@ -1,9 +1,10 @@
 <script lang="ts" setup>
-import PopularMovie from '~/components/main/PopularMovie.vue';
+import PopularStream from '~/components/main/PopularStream.vue';
+
 </script>
 
 <template>
-    <PopularMovie />
+    <PopularStream />
 </template>
 
 <style scoped>
