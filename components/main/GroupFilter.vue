@@ -9,17 +9,17 @@ const props = defineProps<{
 </script>
 
 <template>
-    <div class="flex gap-6">
-        <div v-for="(btnFilter, index) in valuesFilter" :key="index">
-            <button class="default_btn" :class="filter === btnFilter.value ? 'selected_btn' : 'unselected_btn'"
-                @click="props.onHandleFilter(btnFilter.value)">{{ btnFilter.title }}</button>
+    <div class="flex flex-row max-w-100 gap-6 flex-nowrap overflow-x-scroll justify-start">
+        <div v-for="(btnFilter, index) in valuesFilter" class="flex flex-row" :key="index">
+            <button class="default_btn" :class="filter === btnFilter.id ? 'selected_btn' : 'unselected_btn'"
+                @click="props.onHandleFilter(btnFilter.id)">{{ btnFilter.name }}</button>
         </div>
     </div>
 </template>
 
 <style scoped>
 .default_btn {
-    @apply font-bold px-6 py-3 rounded-full;
+    @apply font-bold px-6 py-3 rounded-full whitespace-nowrap;
 }
 
 .unselected_btn {

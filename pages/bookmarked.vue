@@ -8,9 +8,9 @@ import type { IBtnFilter } from '~/interfaces/IBtnFilter';
 
 const filter = ref('stream');
 const filters: IBtnFilter[] = [
-    {title: 'Todos', value: 'stream'},
-    {title: 'Filmes', value: 'movie'},
-    {title: 'Séries', value: 'tv'},
+    {name: 'Todos', id: 'stream'},
+    {name: 'Filmes', id: 'movie'},
+    {name: 'Séries', id: 'tv'},
 ]
 const bookmarkedLocal = ref([...bookmarkeds.value]);
 
@@ -35,14 +35,6 @@ const removeBookmarked = (straem: IMovie | ITv | IMovie) => {
 <template>
     <section class="px-6 pt-4 mt-24 sm:px-20" style="min-height: calc(100vh - 176px);">
         <MainGroupFilter :values-filter="filters" :filter="filter" :onHandleFilter="handleFilter" />
-        <!-- <div class="flex gap-6">
-            <button class="default_btn" :class="filter === 'stream' ? 'selected_btn' : 'unselected_btn'"
-                @click="handleFilter('stream')">Todos</button>
-            <button class="default_btn" :class="filter === 'movie' ? 'selected_btn' : 'unselected_btn'"
-                @click="handleFilter('movie')">Filmes</button>
-            <button class="default_btn" :class="filter === 'tv' ? 'selected_btn' : 'unselected_btn'"
-                @click="handleFilter('tv')">Séries</button>
-        </div> -->
 
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 pt-6">
             <div v-for="bookmarked in bookmarkedLocal" :key="bookmarked.id" class="rounded-lg p-4">
@@ -56,15 +48,4 @@ const removeBookmarked = (straem: IMovie | ITv | IMovie) => {
 </template>
 
 <style scoped>
-.default_btn {
-    @apply font-bold px-6 py-3 rounded-full;
-}
-
-.unselected_btn {
-    @apply text-subtitle bg-primary bg-opacity-15;
-}
-
-.selected_btn {
-    @apply text-app bg-primary;
-}
 </style>

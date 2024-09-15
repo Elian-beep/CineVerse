@@ -1,4 +1,4 @@
 export interface IBtnFilter {
-    title: string,
-    value: string,
+    id: string | number,
+    name: string,
 }

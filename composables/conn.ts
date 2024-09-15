@@ -1,8 +1,24 @@
 import axios from "axios";
+import { useMoviesStore } from "~/store/movie.store";
+
 
 export const http_config = axios.create({
     baseURL: 'https://api.themoviedb.org/3'
 });
+
+export const getGenres = async (streamType: 'movie' | 'tv') => {
+    const movieStore = useMoviesStore();
+    const config = useRuntimeConfig();
+    if(config.public.apiKeyTmdb){
+        try{
+            const response = await http_config.get(`genre/${streamType}/list?api_key=${config.public.apiKeyTmdb}&language=pt`);
+            console.log(response);
+            if(streamType === 'movie') movieStore.setGenres(response.data.genres);
+        }catch(error) {
+            console.log('Erro ao buscar gêneros: ', error);
+        }
+    }
+}
 
 export const getPopularStream = async (streamType: 'movie' | 'tv' | 'all', page: number) => {
     const config = useRuntimeConfig();
