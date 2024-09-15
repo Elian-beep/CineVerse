@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import PopularMovie from '~/components/main/PopularMovie.vue';
 </script>
 
 <template>
-    <PopularMovie />
+    <MainPopularMovie />
+    <section class="px-6">
+        <MainRecentsBookmarkeds />
+    </section>
 </template>

@@ -23,7 +23,7 @@ onBeforeUnmount(() => {
             <NavigationMenu />
         </header>
 
-        <main class="flex-grow pb-6 bg-background min-h-100">
+        <main class="flex flex-col gap-12 pb-6 bg-background">
             <NuxtLayout>
                 <NuxtPage />
             </NuxtLayout>

@@ -22,7 +22,7 @@ const btnConfigBookmarked = ref({
 const fetchPopularTvs = async () => {
     try {
         if (tvStore.getPopularTvs.length === 0) {
-            tvStore.setPopularTvs(await getPopularStream('all', 1));
+            tvStore.setPopularTvs(await getPopularStream('tv', 1));
         }
     } catch (error) {
         console.error('Erro na requisição:', error);
@@ -59,16 +59,14 @@ onMounted(async () => {
 <template>
     <div class="custom-background flex flex-col w-100 flex flex-col justify-items-end">
 
-        <div class="custom-background-size relative bg-cover bg-no-repeat bg-center sm:py-24 sm:px-5 sm:h-screen sm:gb-fixed sm:grid"
+        <div class="custom-background-size relative bg-cover bg-no-repeat bg-center sm:py-24 sm:px-5 sm:h-screen sm:gb-fixed sm:grid sm:bg-top"
             :style="`background-image: url('https://image.tmdb.org/t/p/original${tvStore.getPopularTvs[indexStream]?.poster_path}');`">
 
             <div class="custom-background-desc w-full absolute bottom-0">
                 <div class="w-96 bg-green mx-auto flex flex-col gap-4 sm:m-0 sm:ml-20 sm:gap-6 sm:w-1/2 md:w-1/3">
 
-                    <span class="text-content text-3xl font-bold sm:text-5xl">{{
-                        tvStore.getPopularTvs[indexStream]?.title }}</span>
-                    <p class=" text-subtitle text-base sm:text-xl">{{ tvStore.getPopularTvs[indexStream]?.overview
-                        }}</p>
+                    <span class="text-content text-3xl font-bold sm:text-5xl">{{tvStore.getPopularTvs[indexStream]?.name }}</span>
+                    <p class=" text-subtitle text-base sm:text-xl">{{ tvStore.getPopularTvs[indexStream]?.overview}}</p>
 
                     <div class="flex gap-4 sm:mt-6 sm:gap-6">
 

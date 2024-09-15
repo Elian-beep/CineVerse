@@ -6,7 +6,7 @@ let storedItems = null;
 if(process.client){
     storedItems = localStorage.getItem('CINEVERSE_BOOKMARKEDS');
 }
-const bookmarkeds = ref(storedItems ? JSON.parse(storedItems) : []);
+export const bookmarkeds = ref(storedItems ? JSON.parse(storedItems) : []);
 
 // INFO: Verifica se o item está salvo na lista de favoritos
 export const checkBookmarked = (stream: IMovie | ITv | IStream) => {

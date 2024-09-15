@@ -12,6 +12,5 @@ export interface IMovie {
     title: string; 
     video: boolean;
     vote_average: number;
-    vote_count: number; 
-    name: string | null,
+    vote_count: number;
 }

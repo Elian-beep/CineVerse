@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import PopularTv from '~/components/main/PopularTv.vue';
-import { useTvsStore } from '~/store/tv.store';
-
-const tvStore = useTvsStore();
+import defaultSection from '~/layouts/defaultSection.vue';
 </script>
 
 <template>
-    <PopularTv />
+    <MainPopularTv />
+    <defaultSection>
+        <MainRecentsBookmarkeds />
+    </defaultSection>
 </template>

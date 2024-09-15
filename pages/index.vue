@@ -1,10 +1,11 @@
 <script lang="ts" setup>
-import PopularStream from '~/components/main/PopularStream.vue';
-
 </script>
 
 <template>
-    <PopularStream />
+    <MainPopularStream />
+    <section class="px-6">
+        <MainRecentsBookmarkeds />
+    </section>
 </template>
 
 <style scoped>
