@@ -54,7 +54,7 @@ onMounted(async () => {
 <template>
     <div class="custom-background flex flex-col w-100 flex flex-col justify-items-end">
 
-        <div class="custom-background-size relative bg-cover bg-no-repeat bg-center sm:py-24 sm:px-5 sm:h-screen sm:gb-fixed sm:grid sm:bg-top"
+        <div class="custom-background-size relative bg-cover bg-no-repeat bg-center sm:py-24 sm:px-5 sm:h-screen sm:bg-fixed sm:grid"
             :style="`background-image: url('https://image.tmdb.org/t/p/original${tvStore.getPopularTvs[indexStream]?.poster_path}');`">
 
             <div class="custom-background-desc w-full absolute bottom-0">
