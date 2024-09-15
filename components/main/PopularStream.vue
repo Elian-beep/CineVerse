@@ -58,7 +58,7 @@ const nextPopularStreams = () => {
 //     btnConfigBookmarked.value.iSave = checkBookmarked(moviesStore.getPopularMovies[indexMovie.value]);
 // }
 const handleToggleBookmarked = (stream: IStream) => {
-    toggleBookmarked(streamStore.getPopularStreams[streamStore.getIndexPopularStream])
+    toggleBookmarked(streamStore.getPopularStreams[streamStore.getIndexPopularStream], null)
     btnConfigBookmarked.value.iSave = checkBookmarked(streamStore.getPopularStreams[indexStream.value]);
 }
 

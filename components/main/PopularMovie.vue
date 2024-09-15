@@ -37,7 +37,7 @@ const nextPopularMovies = () => {
 }
 
 const handleToggleBookmarked = () => {
-    toggleBookmarked(moviesStore.getPopularMovies[moviesStore.getIndexPopularMovie])
+    toggleBookmarked(moviesStore.getPopularMovies[moviesStore.getIndexPopularMovie], 'movie')
     btnConfigBookmarked.value.iSave = checkBookmarked(moviesStore.getPopularMovies[index.value]);
 }
 

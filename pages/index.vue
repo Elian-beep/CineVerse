@@ -1,13 +1,13 @@
 <script lang="ts" setup>
+import DefaultSection from '~/layouts/defaultSection.vue';
+
 </script>
 
 <template>
     <MainPopularStream />
-    <section class="px-6">
+    <DefaultSection>
         <MainRecentsBookmarkeds />
-    </section>
+    </DefaultSection>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

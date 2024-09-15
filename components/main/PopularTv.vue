@@ -36,7 +36,7 @@ const nextPopularTvs = () => {
 }
 
 const handleToggleBookmarked = () => {
-    toggleBookmarked(tvStore.getPopularTvs[tvStore.getIndexPopularTv])
+    toggleBookmarked(tvStore.getPopularTvs[tvStore.getIndexPopularTv], 'tv')
     btnConfigBookmarked.value.iSave = checkBookmarked(tvStore.getPopularTvs[indexStream.value]);
 }
 

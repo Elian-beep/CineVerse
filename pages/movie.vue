@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import DefaultSection from '~/layouts/defaultSection.vue';
+
 </script>
 
 <template>
     <MainPopularMovie />
-    <section class="px-6">
+    <DefaultSection>
         <MainRecentsBookmarkeds />
-    </section>
+    </DefaultSection>
 </template>
