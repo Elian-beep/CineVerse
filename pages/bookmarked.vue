@@ -3,16 +3,24 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faMinus } from '@fortawesome/free-solid-svg-icons';
 import type { IMovie } from '~/interfaces/IMovie';
 import type { ITv } from '~/interfaces/ITv';
+import type { IBtnFilter } from '~/interfaces/IBtnFilter';
 
 
 const filter = ref('stream');
+const filters: IBtnFilter[] = [
+    {title: 'Todos', value: 'stream'},
+    {title: 'Filmes', value: 'movie'},
+    {title: 'Séries', value: 'tv'},
+]
 const bookmarkedLocal = ref([...bookmarkeds.value]);
 
-const handleFilter = (value: string) => {
-    filter.value = value;
-    bookmarkedLocal.value = [...bookmarkeds.value];
-    if(value !== 'stream'){
-        bookmarkedLocal.value = bookmarkedLocal.value.filter((b: IMovie | ITv) => b.media_type === value);
+const handleFilter = (value: string | number) => {
+    if(typeof value === 'string'){
+        filter.value = value;
+        bookmarkedLocal.value = [...bookmarkeds.value];
+        if(value !== 'stream'){
+            bookmarkedLocal.value = bookmarkedLocal.value.filter((b: IMovie | ITv) => b.media_type === value);
+        }
     }
 }
 
@@ -26,14 +34,15 @@ const removeBookmarked = (straem: IMovie | ITv | IMovie) => {
 
 <template>
     <section class="px-6 pt-4 mt-24 sm:px-20" style="min-height: calc(100vh - 176px);">
-        <div class="flex gap-6">
+        <MainGroupFilter :values-filter="filters" :filter="filter" :onHandleFilter="handleFilter" />
+        <!-- <div class="flex gap-6">
             <button class="default_btn" :class="filter === 'stream' ? 'selected_btn' : 'unselected_btn'"
                 @click="handleFilter('stream')">Todos</button>
             <button class="default_btn" :class="filter === 'movie' ? 'selected_btn' : 'unselected_btn'"
                 @click="handleFilter('movie')">Filmes</button>
             <button class="default_btn" :class="filter === 'tv' ? 'selected_btn' : 'unselected_btn'"
                 @click="handleFilter('tv')">Séries</button>
-        </div>
+        </div> -->
 
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 pt-6">
             <div v-for="bookmarked in bookmarkedLocal" :key="bookmarked.id" class="rounded-lg p-4">
