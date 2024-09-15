@@ -2,13 +2,7 @@
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { getPopularStream } from '~/composables/conn';
 import { useMoviesStore } from '~/store/movie.store';
-import { useTvsStore } from '~/store/tv.store';
-import { useStreamsStore } from '~/store/stream.store';
 import { faPlay, faPlusCircle, faBookmark } from '@fortawesome/free-solid-svg-icons';
-import { type IMovie } from '~/interfaces/IMovie';
-import type { StoreDefinition } from 'pinia';
-import type { ITv } from '~/interfaces/ITv';
-import type { IStream } from '~/interfaces/IStream';
 
 const btnConfigBookmarked = ref({
     iSave: false,
@@ -42,14 +36,14 @@ const handleToggleBookmarked = () => {
 }
 
 watch(
-  () => moviesStore.popularMovies,
-  (newMovies) => {
-    if (newMovies.length > 0) {
-      btnConfigBookmarked.value.iSave = checkBookmarked(moviesStore.getPopularMovies[index.value]);
-      setInterval(nextPopularMovies, 60000);
-    }
-  },
-  { immediate: true }
+    () => moviesStore.popularMovies,
+    (newMovies) => {
+        if (newMovies.length > 0) {
+            btnConfigBookmarked.value.iSave = checkBookmarked(moviesStore.getPopularMovies[index.value]);
+            setInterval(nextPopularMovies, 60000);
+        }
+    },
+    { immediate: true }
 );
 
 onMounted(async () => {
@@ -83,7 +77,8 @@ onMounted(async () => {
                         <button @click="handleToggleBookmarked()"
                             class="bg-transparent rounded-full px-4 py-3 text-primary flex gap-2 items-center border-solid border-2 border-primary sm:hover:bg-primary sm:hover:bg-opacity-15">
                             <FontAwesomeIcon :icon="btnConfigBookmarked.iSave ? faBookmark : faPlusCircle" />
-                            <span>{{ btnConfigBookmarked.iSave ? btnConfigBookmarked.titleUnsave : btnConfigBookmarked.titleSave }}</span>
+                            <span>{{ btnConfigBookmarked.iSave ? btnConfigBookmarked.titleUnsave :
+                                btnConfigBookmarked.titleSave }}</span>
                         </button>
 
                     </div>

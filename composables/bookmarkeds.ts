@@ -2,11 +2,7 @@ import { type IMovie } from '~/interfaces/IMovie';
 import type { IStream } from '~/interfaces/IStream';
 import type { ITv } from '~/interfaces/ITv';
 
-let storedItems = null;
-if (process.client) {
-    storedItems = localStorage.getItem('CINEVERSE_BOOKMARKEDS');
-}
-export const bookmarkeds = ref(storedItems ? JSON.parse(storedItems) : []);
+export const bookmarkeds = ref();
 
 export const asyncBookmarkedsStorage = () => {
     let storedItems = null;

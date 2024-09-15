@@ -1,13 +1,8 @@
 <script lang="ts" setup>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { getPopularStream } from '~/composables/conn';
-import { useMoviesStore } from '~/store/movie.store';
 import { useTvsStore } from '~/store/tv.store';
 import { faPlay, faPlusCircle, faBookmark } from '@fortawesome/free-solid-svg-icons';
-import { type IMovie } from '~/interfaces/IMovie';
-import type { StoreDefinition } from 'pinia';
-import type { ITv } from '~/interfaces/ITv';
-import type { IStream } from '~/interfaces/IStream';
 
 const tvStore = useTvsStore(); //stream
 
@@ -41,14 +36,14 @@ const handleToggleBookmarked = () => {
 }
 
 watch(
-  () => tvStore.popularTvs,
-  (newStreams) => {
-    if (newStreams.length > 0) {
-      btnConfigBookmarked.value.iSave = checkBookmarked(tvStore.getPopularTvs[indexStream.value]);
-      setInterval(nextPopularTvs, 60000);
-    }
-  },
-  { immediate: true }
+    () => tvStore.popularTvs,
+    (newStreams) => {
+        if (newStreams.length > 0) {
+            btnConfigBookmarked.value.iSave = checkBookmarked(tvStore.getPopularTvs[indexStream.value]);
+            setInterval(nextPopularTvs, 60000);
+        }
+    },
+    { immediate: true }
 );
 
 onMounted(async () => {
@@ -65,8 +60,9 @@ onMounted(async () => {
             <div class="custom-background-desc w-full absolute bottom-0">
                 <div class="w-96 bg-green mx-auto flex flex-col gap-4 sm:m-0 sm:ml-20 sm:gap-6 sm:w-1/2 md:w-1/3">
 
-                    <span class="text-content text-3xl font-bold sm:text-5xl">{{tvStore.getPopularTvs[indexStream]?.name }}</span>
-                    <p class=" text-subtitle text-base sm:text-xl">{{ tvStore.getPopularTvs[indexStream]?.overview}}</p>
+                    <span class="text-content text-3xl font-bold sm:text-5xl">{{ tvStore.getPopularTvs[indexStream]?.name
+                        }}</span>
+                    <p class=" text-subtitle text-base sm:text-xl">{{ tvStore.getPopularTvs[indexStream]?.overview }}</p>
 
                     <div class="flex gap-4 sm:mt-6 sm:gap-6">
 
@@ -80,7 +76,8 @@ onMounted(async () => {
                         <button @click="handleToggleBookmarked()"
                             class="bg-transparent rounded-full px-4 py-3 text-primary flex gap-2 items-center border-solid border-2 border-primary sm:hover:bg-primary sm:hover:bg-opacity-15">
                             <FontAwesomeIcon :icon="btnConfigBookmarked.iSave ? faBookmark : faPlusCircle" />
-                            <span>{{ btnConfigBookmarked.iSave ? btnConfigBookmarked.titleUnsave : btnConfigBookmarked.titleSave }}</span>
+                            <span>{{ btnConfigBookmarked.iSave ? btnConfigBookmarked.titleUnsave :
+                                btnConfigBookmarked.titleSave }}</span>
                         </button>
 
                     </div>

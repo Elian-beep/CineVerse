@@ -26,7 +26,6 @@ const removeBookmarked = (straem: IMovie | ITv | IMovie) => {
 
 <template>
     <section class="px-6 pt-4 mt-24 sm:px-20" style="min-height: calc(100vh - 176px);">
-        <p class="text-content">{{ bookmarkeds.length }}</p>
         <div class="flex gap-6">
             <button class="default_btn" :class="filter === 'stream' ? 'selected_btn' : 'unselected_btn'"
                 @click="handleFilter('stream')">Todos</button>

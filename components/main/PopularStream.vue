@@ -1,19 +1,12 @@
 <script lang="ts" setup>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { getPopularStream } from '~/composables/conn';
-import { useMoviesStore } from '~/store/movie.store';
-import { useTvsStore } from '~/store/tv.store';
 import { useStreamsStore } from '~/store/stream.store';
 import { faPlay, faPlusCircle, faBookmark } from '@fortawesome/free-solid-svg-icons';
-import { type IMovie } from '~/interfaces/IMovie';
-import type { StoreDefinition } from 'pinia';
-import type { ITv } from '~/interfaces/ITv';
 import type { IStream } from '~/interfaces/IStream';
 
-// const moviesStore = useMoviesStore(); //movie
-const streamStore = useStreamsStore(); //stream
+const streamStore = useStreamsStore();
 
-// const indexMovie = ref(moviesStore.getIndexPopularMovie); //movie
 const indexStream = ref(streamStore.getIndexPopularStream);
 
 const btnConfigBookmarked = ref({
@@ -22,16 +15,6 @@ const btnConfigBookmarked = ref({
     titleUnsave: 'Adicionado a lista',
 });
 
-
-// const fetchPopularMovies = async () => { //movie
-//     try {
-//         if (moviesStore.getPopularMovies.length === 0) {
-//             moviesStore.setPopularMovies(await getPopularStream('movie', 1));
-//         }
-//     } catch (error) {
-//         console.error('Erro na requisição:', error);
-//     }
-// }
 const fetchPopularStreams = async () => {
     try {
         if (streamStore.getPopularStreams.length === 0) {
@@ -42,49 +25,29 @@ const fetchPopularStreams = async () => {
     }
 }
 
-// const nextPopularMovies = () => { //movie
-//     indexMovie.value = (indexMovie.value + 1) % moviesStore.getPopularMovies.length;
-//     btnConfigBookmarked.value.iSave = checkBookmarked(moviesStore.getPopularMovies[indexMovie.value]);
-//     moviesStore.setIndexPopularMovie(indexMovie.value);
-// }
 const nextPopularStreams = () => {
     indexStream.value = (indexStream.value + 1) % streamStore.getPopularStreams.length;
     btnConfigBookmarked.value.iSave = checkBookmarked(streamStore.getPopularStreams[indexStream.value]);
     streamStore.setIndexPopularStream(indexStream.value);
 }
 
-// const handleToggleBookmarked = (movie: IMovie) => { //movie
-//     toggleBookmarked(moviesStore.getPopularMovies[moviesStore.getIndexPopularMovie])
-//     btnConfigBookmarked.value.iSave = checkBookmarked(moviesStore.getPopularMovies[indexMovie.value]);
-// }
 const handleToggleBookmarked = (stream: IStream) => {
     toggleBookmarked(streamStore.getPopularStreams[streamStore.getIndexPopularStream], null)
     btnConfigBookmarked.value.iSave = checkBookmarked(streamStore.getPopularStreams[indexStream.value]);
 }
 
-// watch( //movie
-//   () => moviesStore.popularMovies,
-//   (newMovies) => {
-//     if (newMovies.length > 0) {
-//       btnConfigBookmarked.value.iSave = checkBookmarked(moviesStore.getPopularMovies[indexMovie.value]);
-//       setInterval(nextPopularMovies, 60000);
-//     }
-//   },
-//   { immediate: true }
-// );
 watch(
-  () => streamStore.popularStreams,
-  (newStreams) => {
-    if (newStreams.length > 0) {
-      btnConfigBookmarked.value.iSave = checkBookmarked(streamStore.getPopularStreams[indexStream.value]);
-      setInterval(nextPopularStreams, 60000);
-    }
-  },
-  { immediate: true }
+    () => streamStore.popularStreams,
+    (newStreams) => {
+        if (newStreams.length > 0) {
+            btnConfigBookmarked.value.iSave = checkBookmarked(streamStore.getPopularStreams[indexStream.value]);
+            setInterval(nextPopularStreams, 60000);
+        }
+    },
+    { immediate: true }
 );
 
 onMounted(async () => {
-    // fetchPopularMovies(); //movie
     fetchPopularStreams();
 });
 </script>
@@ -100,7 +63,8 @@ onMounted(async () => {
 
                     <span class="text-content text-3xl font-bold sm:text-5xl">{{
                         streamStore.getPopularStreams[indexStream]?.title }}</span>
-                    <p class=" text-subtitle text-base sm:text-xl">{{ streamStore.getPopularStreams[indexStream]?.overview
+                    <p class=" text-subtitle text-base sm:text-xl">{{
+                        streamStore.getPopularStreams[indexStream]?.overview
                         }}</p>
 
                     <div class="flex gap-4 sm:mt-6 sm:gap-6">
@@ -115,7 +79,8 @@ onMounted(async () => {
                         <button @click="handleToggleBookmarked(streamStore.getPopularStreams[indexStream])"
                             class="bg-transparent rounded-full px-4 py-3 text-primary flex gap-2 items-center border-solid border-2 border-primary sm:hover:bg-primary sm:hover:bg-opacity-15">
                             <FontAwesomeIcon :icon="btnConfigBookmarked.iSave ? faBookmark : faPlusCircle" />
-                            <span>{{ btnConfigBookmarked.iSave ? btnConfigBookmarked.titleUnsave : btnConfigBookmarked.titleSave }}</span>
+                            <span>{{ btnConfigBookmarked.iSave ? btnConfigBookmarked.titleUnsave :
+                                btnConfigBookmarked.titleSave }}</span>
                         </button>
 
                     </div>
