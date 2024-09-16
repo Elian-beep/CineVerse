@@ -16,7 +16,7 @@
         /* Edge */
         -ms-overflow-style: auto;
     }
-
+    
     .custom_scroll::-webkit-scrollbar {
         display: block;
         width: 8px;
