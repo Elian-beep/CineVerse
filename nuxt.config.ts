@@ -1,10 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  ssr: true,
-  nitro: {
-    preset: 'vercl',
-  },
   compatibilityDate: '2024-04-03',
+  ssr: true,
   devtools: { enabled: false },
   modules: ['@nuxtjs/tailwindcss'],
   css: ['~/assets/css/tailwind.css', '~/assets/css/global.css'],
@@ -17,6 +14,7 @@ export default defineNuxtConfig({
     port: 8080,
   },
   app: {
+    baseURL: '/',
     head: {
       title: 'CineVerse',
       meta: [
