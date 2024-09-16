@@ -20,11 +20,19 @@ const openDetails = (stream: IMovie | ITv | IStream) => {
 
 <template>
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 pt-6">
-        <div v-for="stream in grupStream" :key="stream.id" class="rounded-lg p-2">
-            <div @click="openDetails(stream)" class="relative rounded-xl min-h-56 bg-cover bg-center sm:h-60 xl:h-80"
+        <div v-for="stream in grupStream" :key="stream.id" class="rounded-lg p-2 sm:hover:p-4 transition-all duration-300">
+            <div @click="openDetails(stream)" class="relative cursor-pointer rounded-xl min-h-56 bg-cover bg-center sm:h-60 xl:h-80"
                 :style="`background-image: url('https://image.tmdb.org/t/p/original${stream.poster_path}');`">
-                <slot :stream="stream" :index="stream.id"></slot>
+                <slot :stream="stream" :index="stream.id">
+                </slot>
             </div>
         </div>
     </div>
 </template>
+
+<style scoped>
+.card_desc{
+    /* TODO: Refatorar cores presentes em gradients para as variaveis */
+    background: linear-gradient(180deg, theme('colors.app') 80%, transparent 100%);
+}
+</style>
