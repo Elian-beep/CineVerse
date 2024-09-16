@@ -42,7 +42,7 @@ const toggleMenu = () => {
                     </div>
                 </span>
                 <div v-for="(item, index) in menuItens" class="sm:flex">
-                    <NuxtLink @click="toggleMenu" :to="item.to" class="block pt-6 pl-6 custom-desktop-items sm:hover:border-b-2 sm:focus:text-primary">
+                    <NuxtLink @click="toggleMenu" :to="item.to" class="block pt-6 pl-6 custom-desktop-items border-b-2 border-transparent sm:hover:border-primary sm:focus:text-primary">
                         {{ item.title }}</NuxtLink>
                 </div>
             </nav>
