@@ -20,6 +20,7 @@ const btnConfigBookmarked = ref({
 });
 
 const handleToggleBookmarked = () => {
+    stream.value.media_type = streamType;
     toggleBookmarked(stream.value);
     btnConfigBookmarked.value.iSave = checkBookmarked(stream.value);
 }
@@ -40,7 +41,7 @@ onMounted(async () => {
         <div v-if="stream" class="background relative bg-cover bg-no-repeat bg-center"
             :style="`background-image: url('https://image.tmdb.org/t/p/original${stream?.poster_path}');`">
 
-            <div class="flex flex-col gap-4 absolute text-content z-10 bottom-1/3 left-6 right-12 sm:left-20 md:right-1/3 xl:right-2/3">
+            <div class="flex flex-col gap-4 absolute text-content z-10 bottom-1/3 left-6 right-12 sm:left-20 md:right-1/3 xl:right-2/3 xl:bottom-1/4">
                 <h1 class="font-extrabold text-5xl">{{ stream?.title || stream?.name }}</h1>
                 <div class="flex gap-4 flex-wrap">
                     <div v-for="genre in stream.genres" :key="genre.id">
@@ -50,6 +51,7 @@ onMounted(async () => {
                 <p>{{ stream.overview }}</p>
                 <p class="text-sm">Mídia de avaliação: <span :class="colorAverage">{{ stream.vote_average }}</span></p>
 
+                <!-- Componentizar dupla de botões (se possível) -->
                 <div class="flex gap-4">
                     <button @click="handleToggleBookmarked()"
                         class="bg-transparent rounded-full px-4 py-3 text-primary flex gap-2 items-center border-solid border-2 border-primary sm:hover:bg-primary sm:hover:bg-opacity-15">

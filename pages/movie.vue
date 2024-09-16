@@ -4,6 +4,7 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
 import { storeToRefs } from 'pinia';
 import DefaultSection from '~/layouts/defaultSection.vue';
 import { useMoviesStore } from '~/store/movie.store';
+import type { IMovie } from '~/interfaces/IMovie';
 
 const movieStore = useMoviesStore();
 
@@ -31,6 +32,7 @@ const handleFilter = async (value: number | string) => {
 onMounted(() => {
     handleFilter(movieStore.getCurrentGenre);
     movieStore.fetchPage(movieStore.getCurrentPage);
+    console.log(movieStore.getMovies);
 });
 
 </script>

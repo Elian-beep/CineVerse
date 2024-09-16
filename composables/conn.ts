@@ -1,4 +1,6 @@
 import axios from "axios";
+import type { IMovie } from "~/interfaces/IMovie";
+import type { ITv } from "~/interfaces/ITv";
 import { useMoviesStore } from "~/store/movie.store";
 import { useStreamsStore } from "~/store/stream.store";
 import { useTvsStore } from "~/store/tv.store";
@@ -17,7 +19,6 @@ export const getGenres = async (streamType: 'movie' | 'tv') => {
     if(config.public.apiKeyTmdb){
         try{
             const response = await http_config.get(`genre/${streamType}/list?api_key=${config.public.apiKeyTmdb}&language=pt`);
-            console.log(response);
             if(streamType === 'movie'){
                 movieStore.setGenres(response.data.genres);
                 movieStore.setCurrentGenre(response.data.genres[0].id);
@@ -47,13 +48,19 @@ export const getStream = async (streamType: 'movie' | 'tv' | 'all', page: number
                 streamStore.setStreams(response.data.results);
             }
             if(streamType === 'movie'){
-                movieStore.setMovies(response.data.results);
+                const movies: IMovie[] = response.data.results.map((m: Omit<IMovie, 'media_type'>) => ({
+                    ...m, media_type: 'movie'
+                }));
+                movieStore.setMovies(movies);
                 movieStore.setCurrentPage(response.data.page);
                 movieStore.setTotalPages(response.data.total_pages);
                 movieStore.setTotalMovies(response.data.total_results);
             }
             if(streamType === 'tv'){
-                tvStore.setTvs(response.data.results);
+                const tvs: ITv[] = response.data.results.map((t: Omit<ITv, 'media_type'>) => ({
+                    ...t, media_type: 'tv'
+                }));
+                tvStore.setTvs(tvs);
                 tvStore.setCurrentPage(response.data.page);
                 tvStore.setTotalPages(response.data.total_pages);
                 tvStore.setTotalTvs(response.data.total_results);

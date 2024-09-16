@@ -25,7 +25,7 @@ const handleFilter = (value: string | number) => {
 }
 
 const removeBookmarked = (straem: IMovie | ITv | IMovie) => {
-    toggleBookmarked(straem, null);
+    toggleBookmarked(straem);
     asyncBookmarkedsStorage();
     handleFilter(filter.value);
 }
