@@ -40,7 +40,7 @@ onMounted(async () => {
         <div v-if="stream" class="background relative bg-cover bg-no-repeat bg-center"
             :style="`background-image: url('https://image.tmdb.org/t/p/original${stream?.poster_path}');`">
 
-            <div class="flex flex-col gap-4 absolute text-content z-10 bottom-1/3 left-6 right-12">
+            <div class="flex flex-col gap-4 absolute text-content z-10 bottom-1/3 left-6 right-12 sm:left-20 md:right-1/3 xl:right-2/3">
                 <h1 class="font-extrabold text-5xl">{{ stream?.title || stream?.name }}</h1>
                 <div class="flex gap-4 flex-wrap">
                     <div v-for="genre in stream.genres" :key="genre.id">
@@ -57,7 +57,7 @@ onMounted(async () => {
                         <span>{{ btnConfigBookmarked.iSave ? btnConfigBookmarked.titleUnsave :
                             btnConfigBookmarked.titleSave }}</span>
                     </button>
-    
+
                     <a :href="`https://www.youtube.com/results?search_query=${stream?.title || stream?.name} Trailer`"
                         target=”_blank”
                         class=" custom-hover-trailer transition-transform transition-300 transition-ease bg-primary rounded-full px-4 py-3 flex gap-2 items-center text-app font-bold">
