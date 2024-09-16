@@ -4,6 +4,7 @@ import type { ITv } from "~/interfaces/ITv";
 import { useMoviesStore } from "~/store/movie.store";
 import { useStreamsStore } from "~/store/stream.store";
 import { useTvsStore } from "~/store/tv.store";
+import { useRuntimeConfig } from '#app';
 
 // TODO: Instanciar stores runtimeConfig globalmente ou na raiz de arquivo
 // TODO: Desfragmentar arquivo de funções
