@@ -28,15 +28,6 @@ const handleFilter = async (value: number | string) => {
     }
 }
 
-watch(
-    () => movieStore.genres,
-    (newGenres) => {
-        const firstGenre = newGenres[0].id;
-        if (typeof firstGenre === 'number' && firstGenre === 0) movieStore.setCurrentGenre(firstGenre);
-    },
-    { immediate: true }
-);
-
 onMounted(() => {
     handleFilter(movieStore.getCurrentGenre);
     movieStore.fetchPage(movieStore.getCurrentPage);

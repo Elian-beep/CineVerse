@@ -10,6 +10,10 @@ export const useTvsStore = defineStore('tvs', {
 
         genres: [] as Array<IBtnFilter>,
         currentGenre: 0,
+
+        currentPage: 1,
+        totalPages: 0,
+        totalTvs: 0,
     }),
 
     getters: {
@@ -20,6 +24,10 @@ export const useTvsStore = defineStore('tvs', {
         getGenres: (state) => state.genres,
         getAsyncGenres: async () => await getGenres('tv'),
         getCurrentGenre: (state) => state.currentGenre,
+
+        getCurrentPage: (state) => state.currentPage,
+        getTotalPages: (state) => state.totalPages,
+        getTotalMovies: (state) => state.totalTvs,
     },
 
     actions: {
@@ -38,6 +46,19 @@ export const useTvsStore = defineStore('tvs', {
         },
         setCurrentGenre(dataGenre: number) {
             this.currentGenre = dataGenre;
-        }
+        },
+
+        setCurrentPage(dataPage: number){
+            this.currentPage = dataPage;
+        },
+        setTotalPages(dataTotal: number){
+            this.totalPages = dataTotal;
+        },
+        setTotalTvs(dataTotalTvs: number){
+            this.totalTvs = dataTotalTvs;
+        },
+        async fetchPage(pageNumber: number) {
+            await getStream('tv', pageNumber, this.currentGenre);
+        },
     }
 })

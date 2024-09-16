@@ -54,6 +54,9 @@ export const getStream = async (streamType: 'movie' | 'tv' | 'all', page: number
             }
             if(streamType === 'tv'){
                 tvStore.setTvs(response.data.results);
+                tvStore.setCurrentPage(response.data.page);
+                tvStore.setTotalPages(response.data.total_pages);
+                tvStore.setTotalTvs(response.data.total_results);
             }
         }catch(error) {
             console.log('Erro ao buscar listagem geral: ', error);
