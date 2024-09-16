@@ -17,6 +17,7 @@ export default defineNuxtConfig({
     port: 8080,
   },
   app: {
+    baseURL: 'CineVerse',
     head: {
       title: 'CineVerse',
       meta: [
