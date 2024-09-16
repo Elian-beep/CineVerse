@@ -6,7 +6,7 @@ const movieStore = useMoviesStore();
 const filter = ref(movieStore.getGenres[0].id);
 
 const handleFilter = (value: number | string) => {
-    if(typeof value === 'number'){
+    if (typeof value === 'number') {
         filter.value = value;
     }
 }
@@ -22,6 +22,7 @@ onMounted(async () => {
     <DefaultSection>
         <MainRecentsBookmarkeds />
 
-        <MainGroupFilter class="my-6 sm:my-12" :filter="filter" :values-filter="movieStore.getGenres" :onHandleFilter="handleFilter"  />
+        <MainGroupFilter class="mt-6 mb-4 sm:my-12" :filter="filter" :values-filter="movieStore.getGenres" :onHandleFilter="handleFilter" />
+        <MainGroupStream :grup-stream="movieStore.getMovies" />
     </DefaultSection>
 </template>
