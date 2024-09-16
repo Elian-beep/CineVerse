@@ -1,0 +1,25 @@
+.custom_scroll {
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.custom_scroll::-webkit-scrollbar {
+    display: none;
+}
+
+@media screen and (min-width: 640px) {
+    .custom_scroll {
+        scrollbar-color: #FFC107 transparent;
+        /* Firefox */
+        scrollbar-width: thin;
+        /* Edge */
+        -ms-overflow-style: auto;
+    }
+    
+    .custom_scroll::-webkit-scrollbar {
+        display: block;
+        width: 8px;
+        height: 8px;
+    }
+}

@@ -3,7 +3,12 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss'],
-  css: ['~/assets/css/tailwind.css'],
+  css: ['~/assets/css/tailwind.css', '~/assets/css/global.css'],
+  runtimeConfig: {
+    public: {
+      apiKeyTmdb: process.env.NUXT_API_KEY_TMDB,
+    },
+  },
   devServer: {
     port: 8080,
   },
