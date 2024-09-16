@@ -7,15 +7,19 @@ export const useTvsStore = defineStore('tvs', {
         tvs: [] as Array<ITv>,
         popularTvs: [] as Array<ITv>,
         indexPopularTv: 0 as number,
+
         genres: [] as Array<IBtnFilter>,
+        currentGenre: 0,
     }),
 
     getters: {
         getTvs: (state) => state.tvs,
         getPopularTvs: (state) => state.popularTvs,
         getIndexPopularTv: (state) => state.indexPopularTv,
+
         getGenres: (state) => state.genres,
         getAsyncGenres: async () => await getGenres('tv'),
+        getCurrentGenre: (state) => state.currentGenre,
     },
 
     actions: {
@@ -28,8 +32,12 @@ export const useTvsStore = defineStore('tvs', {
         setIndexPopularTv(newIndex: number) {
             this.indexPopularTv = newIndex;
         },
+
         setGenres(dataGenres: Array<IBtnFilter>) {
             this.genres = dataGenres;
         },
+        setCurrentGenre(dataGenre: number) {
+            this.currentGenre = dataGenre;
+        }
     }
 })

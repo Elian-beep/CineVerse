@@ -18,14 +18,21 @@ export const getGenres = async (streamType: 'movie' | 'tv') => {
         try{
             const response = await http_config.get(`genre/${streamType}/list?api_key=${config.public.apiKeyTmdb}&language=pt`);
             console.log(response);
-            if(streamType === 'movie') movieStore.setGenres(response.data.genres);
-            if(streamType === 'tv') tvStore.setGenres(response.data.genres);
+            if(streamType === 'movie'){
+                movieStore.setGenres(response.data.genres);
+                movieStore.setCurrentGenre(response.data.genres[0].id);
+            }
+            if(streamType === 'tv'){
+                tvStore.setGenres(response.data.genres);
+                tvStore.setCurrentGenre(response.data.genres[0].id);
+            }
         }catch(error) {
             console.log('Erro ao buscar gêneros: ', error);
         }
     }
 }
 
+// TODO: Retornar data e realizar aplicações localmente nas stores
 export const getStream = async (streamType: 'movie' | 'tv' | 'all', page: number, genre?: number) => {
     const streamStore = useStreamsStore();
     const movieStore = useMoviesStore();
@@ -35,10 +42,19 @@ export const getStream = async (streamType: 'movie' | 'tv' | 'all', page: number
     const req_path = streamType === 'all' ? 'trending/all/day' : 'discover/'+streamType;
     if(config.public.apiKeyTmdb){
         try{
-            const response = await http_config.get(`${req_path}?api_key=${config.public.apiKeyTmdb}&with_genres=${genre}&language=pt-BR&page=1&sort_by=popularity.desc`);
-            if(streamType === 'all') streamStore.setStreams(response.data.results);
-            if(streamType === 'movie') movieStore.setMovies(response.data.results);
-            if(streamType === 'tv') tvStore.setTvs(response.data.results);
+            const response = await http_config.get(`${req_path}?api_key=${config.public.apiKeyTmdb}&with_genres=${genre}&language=pt-BR&page=${page}&sort_by=popularity.desc`);
+            if(streamType === 'all'){
+                streamStore.setStreams(response.data.results);
+            }
+            if(streamType === 'movie'){
+                movieStore.setMovies(response.data.results);
+                movieStore.setCurrentPage(response.data.page);
+                movieStore.setTotalPages(response.data.total_pages);
+                movieStore.setTotalMovies(response.data.total_results);
+            }
+            if(streamType === 'tv'){
+                tvStore.setTvs(response.data.results);
+            }
         }catch(error) {
             console.log('Erro ao buscar listagem geral: ', error);
         }
