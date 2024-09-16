@@ -8,6 +8,7 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
     "deploy": "yarn generate && gh-pages -d dist"
   },
   "dependencies": {
@@ -19,6 +20,9 @@
     "pinia": "^2.2.2",
     "tailwind-scrollbar": "^3.1.0",
     "vue-bundle-renderer": "^2.1.0"
+  },
+  "overrides": {
+    "vue": "latest"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.12.1",
