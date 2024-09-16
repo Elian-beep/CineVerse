@@ -37,7 +37,7 @@ const removeBookmarked = (straem: IMovie | ITv | IMovie) => {
         <MainGroupFilter :values-filter="filters" :filter="filter" :onHandleFilter="handleFilter" />
         <MainGroupStream :grup-stream="bookmarkedLocal">
             <template #default="{ stream, index }">
-                <FontAwesomeIcon @click="removeBookmarked(stream)" :icon="faMinus" class="absolute right-4 top-4 p-1 bg-primary text-app rounded-full"></FontAwesomeIcon>
+                <FontAwesomeIcon @click="removeBookmarked(stream)" :icon="faMinus" class="absolute right-4 top-4 p-1 bg-primary text-app rounded-full z-25"></FontAwesomeIcon>
             </template>
         </MainGroupStream>
 
