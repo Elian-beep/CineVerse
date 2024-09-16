@@ -9,6 +9,7 @@ const props = defineProps<{
     grupStream: ITv[] | IMovie[] | IStream[],
 }>();
 
+// Transformar em uma função composable
 const openDetails = (stream: IMovie | ITv | IStream) => {
     router.push({
         name: 'details-stream_type-id',
