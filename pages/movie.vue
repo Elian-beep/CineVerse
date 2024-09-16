@@ -1,19 +1,19 @@
 <script setup lang="ts">
+import type { IMovie } from '~/interfaces/IMovie';
 import DefaultSection from '~/layouts/defaultSection.vue';
 import { useMoviesStore } from '~/store/movie.store';
 
 const movieStore = useMoviesStore();
 const filter = ref(movieStore.getGenres[0].id);
+const movieLocal = ref([...movieStore.getMovies]);
 
-const handleFilter = (value: number | string) => {
+const handleFilter = async (value: number | string) => {
     if (typeof value === 'number') {
         filter.value = value;
+        await getStream('movie', 1, value);
+        movieLocal.value = [...movieStore.getMovies];
     }
 }
-
-onMounted(async () => {
-    await getStream('movie', 1);
-});
 
 </script>
 
@@ -22,7 +22,7 @@ onMounted(async () => {
     <DefaultSection>
         <MainRecentsBookmarkeds />
 
-        <MainGroupFilter class="mt-6 mb-4 sm:my-12" :filter="filter" :values-filter="movieStore.getGenres" :onHandleFilter="handleFilter" />
-        <MainGroupStream :grup-stream="movieStore.getMovies" />
+        <MainGroupFilter class="mt-6 mb-4 sm:mt-12 sm:mb-10" :filter="filter" :values-filter="movieStore.getGenres" :onHandleFilter="handleFilter" />
+        <MainGroupStream class="pt-0" :grup-stream="movieLocal" />
     </DefaultSection>
 </template>

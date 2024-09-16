@@ -22,13 +22,13 @@ export const getGenres = async (streamType: 'movie' | 'tv') => {
     }
 }
 
-export const getStream = async (streamType: 'movie' | 'tv' | 'all', page: number) => {
+export const getStream = async (streamType: 'movie' | 'tv' | 'all', page: number, genre?: number) => {
     const movieStore = useMoviesStore();
     const config = useRuntimeConfig();
     const req_path = streamType === 'all' ? 'trending/all/day' : 'discover/'+streamType;
     if(config.public.apiKeyTmdb){
         try{
-            const response = await http_config.get(`${req_path}?api_key=${config.public.apiKeyTmdb}&language=pt-BR&page=1&sort_by=popularity.desc`);
+            const response = await http_config.get(`${req_path}?api_key=${config.public.apiKeyTmdb}&with_genres=${genre}&language=pt-BR&page=1&sort_by=popularity.desc`);
             movieStore.setMovies(response.data.results);
         }catch(error) {
             console.log('Erro ao buscar listagem geral: ', error);

@@ -14,7 +14,7 @@ const props = defineProps<{
         <div v-for="stream in grupStream" :key="stream.id" class="rounded-lg p-4">
             <div class="relative rounded-xl min-h-56 bg-cover bg-center sm:h-60 xl:h-80"
                 :style="`background-image: url('https://image.tmdb.org/t/p/original${stream.poster_path}');`">
-                <slot></slot>
+                <slot :stream="stream" :index="stream.id"></slot>
             </div>
         </div>
     </div>
