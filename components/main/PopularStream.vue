@@ -32,7 +32,7 @@ const nextPopularStreams = () => {
 }
 
 const handleToggleBookmarked = (stream: IStream) => {
-    toggleBookmarked(streamStore.getPopularStreams[streamStore.getIndexPopularStream], null)
+    toggleBookmarked(streamStore.getPopularStreams[streamStore.getIndexPopularStream])
     btnConfigBookmarked.value.iSave = checkBookmarked(streamStore.getPopularStreams[indexStream.value]);
 }
 

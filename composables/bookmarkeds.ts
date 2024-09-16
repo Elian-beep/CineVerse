@@ -18,13 +18,10 @@ export const checkBookmarked = (stream: IMovie | ITv | IStream) => {
 }
 
 //INFO: Adiciona ou remove o item na lista de favoritos
-export const toggleBookmarked = (stream: IMovie | ITv | IStream, type: null | string) => {
+export const toggleBookmarked = (stream: IMovie | ITv | IStream, type?: 'movie' | 'tv') => {
     if (checkBookmarked(stream)) {
         bookmarkeds.value = bookmarkeds.value.filter((s: IMovie | ITv | IStream) => s.id !== stream.id);
     } else {
-        if (!stream.media_type) {
-            stream.media_type = type;
-        }
         bookmarkeds.value.unshift(stream);
     }
     localStorage.setItem('CINEVERSE_BOOKMARKEDS', JSON.stringify(bookmarkeds.value));

@@ -23,13 +23,13 @@ onBeforeUnmount(() => {
             <NavigationMenu />
         </header>
 
-        <main class="flex flex-col gap-12 pb-6 bg-background">
+        <main class="flex flex-col gap-12 bg-background">
             <NuxtLayout>
                 <NuxtPage />
             </NuxtLayout>
         </main>
 
-        <footer class="bg-app text-content p-4 text-center">
+        <footer class="bg-app text-content p-4 text-center z-50">
             <p>&copy; CineVerse</p>
         </footer>
     </div>

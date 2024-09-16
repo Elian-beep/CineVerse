@@ -13,5 +13,5 @@ export interface ITv {
     vote_average: number;
     vote_count: number;
 
-    media_type: null | string;
+    media_type: 'tv';
 }

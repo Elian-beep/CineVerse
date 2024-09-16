@@ -17,6 +17,9 @@ export default {
         background: '#121212',
         app: '#0C0C0C',
 
+        danger: '#FF4C4C',
+        warning: '#FFD700',
+        info: '#4CAF50',
       }
     },
   },

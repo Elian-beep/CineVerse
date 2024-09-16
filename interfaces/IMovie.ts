@@ -14,5 +14,6 @@ export interface IMovie {
     vote_average: number;
     vote_count: number;
 
-    media_type: null | string;
+    media_type: 'movie';
 }
+

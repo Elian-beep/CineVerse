@@ -5,7 +5,7 @@ export interface IStream {
     original_title: string;
     overview: string;
     poster_path: string;
-    media_type: string;
+    media_type: 'movie' | 'tv';
     adult: boolean;
     original_language: string;
     genre_ids: number[];

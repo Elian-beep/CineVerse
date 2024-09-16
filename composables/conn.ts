@@ -78,3 +78,15 @@ export const getPopularStream = async (streamType: 'movie' | 'tv' | 'all', page:
         }
     }
 }
+
+export const getStreamById = async (streamType: 'movie' | 'tv', id: number) => {
+    const config = useRuntimeConfig();
+    if (config.public.apiKeyTmdb){
+        try{
+            const response = await http_config.get(`${streamType}/${id}?api_key=${config.public.apiKeyTmdb}&language=pt-BR`);
+            return response.data;
+        } catch (error) {
+            console.log('Erro ao buscar mídia específica: ', error);
+        }
+    }
+}
