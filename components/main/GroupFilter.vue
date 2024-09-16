@@ -9,7 +9,7 @@ const props = defineProps<{
 </script>
 
 <template>
-    <div class="flex flex-row max-w-100 gap-6 flex-nowrap overflow-x-scroll justify-start">
+    <div class="custom_scroll scrollbar-thin flex flex-row max-w-100 gap-6 flex-nowrap overflow-x-auto justify-start">
         <div v-for="(btnFilter, index) in valuesFilter" class="flex flex-row" :key="index">
             <button class="default_btn" :class="filter === btnFilter.id ? 'selected_btn' : 'unselected_btn'"
                 @click="props.onHandleFilter(btnFilter.id)">{{ btnFilter.name }}</button>

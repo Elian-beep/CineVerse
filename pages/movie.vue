@@ -9,14 +9,19 @@ const handleFilter = (value: number | string) => {
     if(typeof value === 'number'){
         filter.value = value;
     }
-}   
+}
+
+onMounted(async () => {
+    await getStream('movie', 1);
+});
+
 </script>
 
 <template>
     <MainPopularMovie />
     <DefaultSection>
         <MainRecentsBookmarkeds />
-        <MainGroupFilter :filter="filter" :values-filter="movieStore.getGenres" :onHandleFilter="handleFilter"  />
-        <p class="text-content">Busca feita para: {{ filter }}</p>
+
+        <MainGroupFilter class="my-6 sm:my-12" :filter="filter" :values-filter="movieStore.getGenres" :onHandleFilter="handleFilter"  />
     </DefaultSection>
 </template>

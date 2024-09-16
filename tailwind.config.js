@@ -16,11 +16,12 @@ export default {
         subtitle: '#B3B3B3',
         background: '#121212',
         app: '#0C0C0C',
+
       }
     },
   },
   plugins: [
-    // require('@tailwindcss/typography'),
+    require('tailwind-scrollbar'),
   ],
 }
 

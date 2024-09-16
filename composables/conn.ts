@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useMoviesStore } from "~/store/movie.store";
 
+// TODO: Instanciar stores runtimeConfig globalmente ou na raiz de arquivo
+// TODO: Desfragmentar arquivo de funções
 
 export const http_config = axios.create({
     baseURL: 'https://api.themoviedb.org/3'
@@ -20,6 +22,21 @@ export const getGenres = async (streamType: 'movie' | 'tv') => {
     }
 }
 
+export const getStream = async (streamType: 'movie' | 'tv' | 'all', page: number) => {
+    const movieStore = useMoviesStore();
+    const config = useRuntimeConfig();
+    const req_path = streamType === 'all' ? 'trending/all/day' : 'discover/'+streamType;
+    if(config.public.apiKeyTmdb){
+        try{
+            const response = await http_config.get(`${req_path}?api_key=${config.public.apiKeyTmdb}&language=pt-BR&page=1&sort_by=popularity.desc`);
+            // movieStore.setMovies()
+        }catch(error) {
+            console.log('Erro ao buscar listagem geral: ', error);
+        }
+    }
+}
+
+// TODO: Fixar page para 1 (Atualmente funciona por parâmetro)
 export const getPopularStream = async (streamType: 'movie' | 'tv' | 'all', page: number) => {
     const config = useRuntimeConfig();
     const req_path = streamType === 'all' ? 'trending/all/day?' : streamType+'/popular?' ;

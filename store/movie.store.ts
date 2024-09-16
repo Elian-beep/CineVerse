@@ -4,12 +4,14 @@ import type { IMovie } from '~/interfaces/IMovie';
 
 export const useMoviesStore = defineStore('movies', {
     state: () => ({
+        movies: [] as Array<IMovie>,
         popularMovies: [] as Array<IMovie>,
         indexPopularMovie: 0 as number,
         genres: [] as Array<IBtnFilter>,
     }),
 
     getters: {
+        getMovies: (state) => state.movies,
         getPopularMovies: (state) => state.popularMovies,
         getIndexPopularMovie: (state) => state.indexPopularMovie,
         getGenres: (state) => state.genres,
@@ -17,6 +19,9 @@ export const useMoviesStore = defineStore('movies', {
     },
 
     actions: {
+        setMovies(dataMovies: Array<IMovie>){
+            this.movies = dataMovies;
+        },
         setPopularMovies(dataMovies: Array<IMovie>) {
             this.popularMovies = dataMovies;
         },
