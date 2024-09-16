@@ -20,9 +20,9 @@ export default defineNuxtConfig({
       meta: [
         { name: 'description', content: 'Exemlpo de desc de teste' }
       ],
-      // link: [
-      //   { rel: 'icon', type: 'image/vnd.microsoft.icon', href: '' }
-      // ]
+      link: [
+        { rel: 'icon', type: 'image/png', href: '/icon_stream.png' }
+      ]
     }
   }
 })
