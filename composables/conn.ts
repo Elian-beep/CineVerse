@@ -16,10 +16,10 @@ export const http_config = axios.create({
 export const getGenres = async (streamType: 'movie' | 'tv') => {
     const movieStore = useMoviesStore();
     const tvStore = useTvsStore();
-    const config = useRuntimeConfig();
-    if(config.public.apiKeyTmdb){
+    const config = 'c3fe35ca9d8af96ad10ad92f0a2cae2a';
+    if(config){
         try{
-            const response = await http_config.get(`genre/${streamType}/list?api_key=${config.public.apiKeyTmdb}&language=pt`);
+            const response = await http_config.get(`genre/${streamType}/list?api_key=${config}&language=pt`);
             if(streamType === 'movie'){
                 movieStore.setGenres(response.data.genres);
                 movieStore.setCurrentGenre(response.data.genres[0].id);
@@ -40,11 +40,11 @@ export const getStream = async (streamType: 'movie' | 'tv' | 'all', page: number
     const movieStore = useMoviesStore();
     const tvStore = useTvsStore();
 
-    const config = useRuntimeConfig();
+    const config = 'c3fe35ca9d8af96ad10ad92f0a2cae2a';
     const req_path = streamType === 'all' ? 'trending/all/day' : 'discover/'+streamType;
-    if(config.public.apiKeyTmdb){
+    if(config){
         try{
-            const response = await http_config.get(`${req_path}?api_key=${config.public.apiKeyTmdb}&with_genres=${genre}&language=pt-BR&page=${page}&sort_by=popularity.desc`);
+            const response = await http_config.get(`${req_path}?api_key=${config}&with_genres=${genre}&language=pt-BR&page=${page}&sort_by=popularity.desc`);
             if(streamType === 'all'){
                 streamStore.setStreams(response.data.results);
             }
@@ -74,11 +74,11 @@ export const getStream = async (streamType: 'movie' | 'tv' | 'all', page: number
 
 // TODO: Fixar page para 1 (Atualmente funciona por parâmetro)
 export const getPopularStream = async (streamType: 'movie' | 'tv' | 'all', page: number) => {
-    const config = useRuntimeConfig();
+    const config = 'c3fe35ca9d8af96ad10ad92f0a2cae2a';
     const req_path = streamType === 'all' ? 'trending/all/day?' : streamType+'/popular?' ;
-    if (config.public.apiKeyTmdb){
+    if (config){
         try{
-            const response = await http_config.get(`${req_path}api_key=${config.public.apiKeyTmdb}&language=pt-BR&page=${page}`);
+            const response = await http_config.get(`${req_path}api_key=${config}&language=pt-BR&page=${page}`);
 
             return response.data.results.slice(0, 10);
         } catch (error) {
@@ -88,10 +88,10 @@ export const getPopularStream = async (streamType: 'movie' | 'tv' | 'all', page:
 }
 
 export const getStreamById = async (streamType: 'movie' | 'tv', id: number) => {
-    const config = useRuntimeConfig();
-    if (config.public.apiKeyTmdb){
+    const config = 'c3fe35ca9d8af96ad10ad92f0a2cae2a';
+    if (config){
         try{
-            const response = await http_config.get(`${streamType}/${id}?api_key=${config.public.apiKeyTmdb}&language=pt-BR`);
+            const response = await http_config.get(`${streamType}/${id}?api_key=${config}&language=pt-BR`);
             return response.data;
         } catch (error) {
             console.log('Erro ao buscar mídia específica: ', error);
