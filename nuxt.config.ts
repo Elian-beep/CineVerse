@@ -13,7 +13,7 @@ export default defineNuxtConfig({
     port: 8080,
   },
   app: {
-    baseURL: 'CineVerse',
+    baseURL: '/',
     head: {
       title: 'CineVerse',
       meta: [
