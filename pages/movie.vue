@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { storeToRefs } from 'pinia';
 import DefaultSection from '~/layouts/defaultSection.vue';
 import { useMoviesStore } from '~/store/movie.store';
@@ -51,10 +53,15 @@ onMounted(() => {
             :values-filter="movieStore.getGenres" :onHandleFilter="handleFilter" />
         <MainGroupStream class="pt-0" :grup-stream="movieStore.getMovies" />
 
-        <div class="pagination-controls bg-content">
-            <button @click="previousPage" :disabled="currentPage === 1">Anterior</button>
-            <span>Página {{ currentPage }} de {{ totalPages }}</span>
-            <button @click="nextPage" :disabled="currentPage === totalPages">Próxima</button>
+        <!-- TODO: Adicionar adição de página específica e componentizar este trecho -->
+        <div class="flex justify-center gap-6 mt-4 font-base text-primary">
+            <button @click="previousPage" :disabled="currentPage === 1">
+                <FontAwesomeIcon :icon="faChevronLeft" />
+            </button>
+            <span>{{ currentPage }} - {{ totalPages }}</span>
+            <button @click="nextPage" :disabled="currentPage === totalPages">
+                <FontAwesomeIcon :icon="faChevronRight" />
+            </button>
         </div>
     </DefaultSection>
 </template>
